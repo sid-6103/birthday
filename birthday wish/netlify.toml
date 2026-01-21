@@ -1,3 +1,4 @@
 [build]
-  publish = "public"
+  publish = "www"
+  command = "ls -R"
 
