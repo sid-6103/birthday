@@ -1,4 +1,4 @@
 [build]
-  publish = "."
-  command = "echo 'Static site components'"
+  publish = "public"
+  command = "echo 'Deploying public directory'"
 
