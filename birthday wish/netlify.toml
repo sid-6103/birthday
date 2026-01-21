@@ -1,4 +1,5 @@
 [build]
-  publish = "."
-  command = "echo 'Static site - no build required'"
+  base = "/"
+  publish = "/"
+  command = "echo 'Deploying from root'"
 
