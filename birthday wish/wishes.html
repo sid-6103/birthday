@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Wishes For You</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2d132c 0%, #801336 30%, #c72c41 60%, #ee4540 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-100vh) rotate(180deg);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 0 0 50px rgba(255, 223, 186, 0.5);
+            animation: fadeGlow 1.5s ease forwards;
+        }
+
+        .header .subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #ffd93d;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeGlow {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .wishes-section {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .wish-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 40px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .wish-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .wish-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(255, 217, 61, 0.2);
+            border-color: rgba(255, 217, 61, 0.4);
+        }
+
+        .wish-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .wish-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #ffd93d;
+            margin-bottom: 15px;
+        }
+
+        .wish-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.9;
+        }
+
+        .letter-section {
+            margin: 80px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .letter-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .love-letter {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 217, 61, 0.3);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .love-letter::before {
+            content: '💌';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+        }
+
+        .letter-header {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #ffd93d;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .letter-content {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 2;
+            text-align: center;
+        }
+
+        .letter-signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #ffd93d;
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        .continue-btn {
+            display: block;
+            width: fit-content;
+            margin: 60px auto;
+            padding: 22px 55px;
+            background: linear-gradient(135deg, #ffd93d 0%, #ff6b6b 100%);
+            border: none;
+            border-radius: 50px;
+            color: #2d132c;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 45px rgba(255, 217, 61, 0.4);
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 3rem;
+                line-height: 1.2;
+            }
+
+            .header .subtitle {
+                font-size: 1.8rem;
+            }
+
+            .wish-card {
+                padding: 30px 20px;
+            }
+
+            .wish-icon {
+                font-size: 3rem;
+            }
+
+            .wish-title {
+                font-size: 1.6rem;
+            }
+
+            .wish-text {
+                font-size: 1rem;
+            }
+
+            .love-letter {
+                padding: 35px 20px;
+            }
+
+            .letter-header {
+                font-size: 2rem;
+            }
+
+            .letter-content {
+                font-size: 1rem;
+                line-height: 1.9;
+            }
+
+            .letter-signature {
+                font-size: 1.6rem;
+            }
+
+            .continue-btn {
+                padding: 18px 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2.3rem;
+            }
+
+            .header .subtitle {
+                font-size: 1.5rem;
+            }
+
+            .wish-card {
+                padding: 25px 15px;
+            }
+
+            .wish-icon {
+                font-size: 2.5rem;
+            }
+
+            .wish-title {
+                font-size: 1.4rem;
+            }
+
+            .wish-text {
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+
+            .love-letter {
+                padding: 25px 15px;
+            }
+
+            .letter-header {
+                font-size: 1.7rem;
+            }
+
+            .letter-content {
+                font-size: 0.95rem;
+                line-height: 1.8;
+            }
+
+            .letter-signature {
+                font-size: 1.4rem;
+            }
+
+            .continue-btn {
+                padding: 16px 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="container">
+        <div class="header">
+            <h1>🎂 Happy Birthday! 🎂</h1>
+            <p class="subtitle">My Most Special Wishes For You</p>
+        </div>
+        <div class="wishes-section">
+            <div class="wish-card">
+                <div class="wish-icon">🌟</div>
+                <h3 class="wish-title">May Your Dreams Take Flight</h3>
+                <p class="wish-text">I wish for all your dreams to soar higher than the stars. May this year bring you
+                    closer to everything your heart desires.</p>
+            </div>
+            <div class="wish-card">
+                <div class="wish-icon">💕</div>
+                <h3 class="wish-title">Endless Love & Happiness</h3>
+                <p class="wish-text">May your life be filled with love so deep that it takes your breath away. I promise
+                    to be there through every laugh and every tear.</p>
+            </div>
+            <div class="wish-card">
+                <div class="wish-icon">🦋</div>
+                <h3 class="wish-title">Beautiful Transformations</h3>
+                <p class="wish-text">Just like a butterfly emerges more beautiful, may this new year bring amazing
+                    transformations. Grow and become even more incredible!</p>
+            </div>
+            <div class="wish-card">
+                <div class="wish-icon">🌈</div>
+                <h3 class="wish-title">Colors in Every Moment</h3>
+                <p class="wish-text">May your days be painted with vibrant colors of joy, peace, and adventure. Find
+                    magic in the ordinary!</p>
+            </div>
+            <div class="wish-card">
+                <div class="wish-icon">💎</div>
+                <h3 class="wish-title">You Are Priceless</h3>
+                <p class="wish-text">Never forget how precious you are. You are a rare gem, and I feel so blessed to
+                    have you in my life.</p>
+            </div>
+        </div>
+        <div class="letter-section">
+            <div class="love-letter" style="position: relative;">
+                <h2 class="letter-header">A Letter From My Heart</h2>
+                <p class="letter-content">The day when we met i really didn't expect it to be this special and hum dono itne close aa jayen ge
+                    i really don't want to losse this closeness i want ki isse bhi aur zayda close aate jaye we became ever more special for each other then yesterday and 
+                    keep on going on it for forever and bond get more stronger and unbreakable.<br><br>The time when our friendship started after knowing you i don't know but 
+                    from deep down i wished that i wanted to be our friendship this much close and itne short time we are i am so glad i even told you my goal of our friendship and yes i am very happy that its achived.<br><br>I am so happy that i am very special to you close to ur heart holding a very top level of position in ur heart😂
+                but on serious not i am lucky to have you, there for u at any timezone in this world, to protect you from any hurdle, take care of you with highest priority and tuje vo sari happiness dun which u deserve more then actual one
+                and love you more then words can express Happiest Birthday my cutie pie 🫂💕</p>
+                <p class="letter-signature">Your Tom♥</p>
+            </div>
+        </div>
+        <button class="continue-btn" onclick="goToNext()">The Grand Finale ✨</button>
+    </div>
+    <script>
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['#ff6b6b', '#ffd93d', '#c44b6e', '#ff8a9b'];
+            for (let i = 0; i < 40; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = Math.random() * 100 + '%';
+                p.style.width = Math.random() * 15 + 10 + 'px';
+                p.style.height = p.style.width;
+                p.style.background = colors[Math.floor(Math.random() * colors.length)];
+                p.style.animationDuration = (Math.random() * 20 + 15) + 's';
+                p.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(p);
+            }
+        }
+        function revealCards() {
+            const cards = document.querySelectorAll('.wish-card, .letter-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, i) => { if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 200); });
+            }, { threshold: 0.2 });
+            cards.forEach(c => observer.observe(c));
+        }
+        function goToNext() {
+            document.body.style.opacity = 0;
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => window.location.href = 'finale.html', 500);
+        }
+        document.addEventListener('DOMContentLoaded', () => { createParticles(); revealCards(); });
+    </script>
+</body>
+
+</html>

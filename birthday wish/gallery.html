@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Beautiful Memories</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            overflow-x: hidden;
+        }
+
+        .bg-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHeart 15s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .header h1 .gradient-text {
+            background: linear-gradient(135deg, #ff6b9d, #ffd93d, #ff6b9d);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease infinite;
+        }
+
+        .header p {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 15px;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Carousel Container */
+        .carousel-wrapper {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 40px 20px;
+        }
+
+        .carousel-container {
+            overflow: hidden;
+            border-radius: 30px;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: grab;
+            user-select: none;
+        }
+
+        .carousel-track:active {
+            cursor: grabbing;
+        }
+
+        .carousel-card {
+            min-width: 100%;
+            padding: 60px 50px;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 550px;
+        }
+
+        .carousel-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+            z-index: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+
+        .card-image-wrapper {
+            width: 350px;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 0 auto 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+
+
+        /* Gradient backgrounds for cards */
+        .card-gradient-1 {
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+        }
+
+        .card-gradient-2 {
+            background: linear-gradient(135deg, #4a00e0 0%, #8e2de2 100%);
+        }
+
+        .card-gradient-3 {
+            background: linear-gradient(135deg, #f857a6 0%, #ff5858 100%);
+        }
+
+        .card-gradient-4 {
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+        }
+
+        .card-gradient-5 {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        /* Navigation Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .dot {
+            width: 40px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: white;
+            width: 60px;
+        }
+
+
+
+        .continue-btn {
+            display: block;
+            width: fit-content;
+            margin: 60px auto;
+            padding: 22px 55px;
+            background: linear-gradient(135deg, #ff6b9d, #c44b6e);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 45px rgba(255, 107, 157, 0.4);
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.8rem;
+                line-height: 1.2;
+            }
+
+            .header p {
+                font-size: 1.5rem;
+            }
+
+            .carousel-card {
+                padding: 40px 30px;
+                min-height: 500px;
+            }
+
+            .card-image-wrapper {
+                width: 220px;
+                height: 220px;
+            }
+
+            .card-title {
+                font-size: 1.8rem;
+            }
+
+            .card-description {
+                font-size: 1rem;
+            }
+
+
+
+            .continue-btn {
+                padding: 18px 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .header p {
+                font-size: 1.3rem;
+            }
+
+            .container {
+                padding: 40px 15px;
+            }
+
+            .carousel-card {
+                padding: 30px 20px;
+                min-height: 450px;
+            }
+
+            .card-image-wrapper {
+                width: 180px;
+                height: 180px;
+                margin-bottom: 20px;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+
+            .card-description {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+
+
+            .continue-btn {
+                padding: 16px 35px;
+                font-size: 1rem;
+            }
+
+            .dot {
+                width: 30px;
+                height: 5px;
+            }
+
+            .dot.active {
+                width: 45px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-hearts" id="hearts"></div>
+    <div class="container">
+        <div class="header">
+            <h1>📸 <span class="gradient-text">Our Beautiful Memories & You</span> 📸</h1>
+            <p>Swipe through our amazing journey together</p>
+        </div>
+
+        <div class="carousel-wrapper">
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-card card-gradient-1">
+                        <div class="card-content">
+                            <div class="card-image-wrapper">
+                                <img src="1.jpeg" alt="Memory 1">
+                            </div>
+                            <h3 class="card-title">Cute pictures</h3>
+                            <p class="card-description">Ye pic humne tab li thi jab tu diwali pe ghar jane
+                                wali thi and after that ghibli trend aya and first image of which we did ghibli was this
+                                and its
+                                adorable🫣.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card card-gradient-2">
+                        <div class="card-content">
+                            <div class="card-image-wrapper">
+                                <img src="2.jpeg" alt="Memory 2">
+                            </div>
+                            <h3 class="card-title">Clebrating festivals</h3>
+                            <p class="card-description">This pic is very special and also the day and also the momnent
+                                for both of us,
+                                iss hi din maine tuje proper way mai bestfriend ke liye propose kiya tha i did got
+                                nervous and you handled me and
+                                fir ache se ho gaya and u said yess🫠🫠 .</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card card-gradient-3">
+                        <div class="card-content">
+                            <div class="card-image-wrapper">
+                                <img src="3.jpeg" alt="Memory 3">
+                            </div>
+                            <h3 class="card-title">Captivatingly beautiful</h3>
+                            <p class="card-description">kya kya matlab kya hai ye jalpari,Aapsara,rani
+                                sab feek padjaye tere aage dame cute🥰, hot🥵, sexy🫢, lovely☺️, param sundari🤭🙈 sab
+                                chiz
+                                ka combo hai.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card card-gradient-4">
+                        <div class="card-content">
+                            <div class="card-image-wrapper">
+                                <img src="4.jpeg" alt="Memory 4">
+                            </div>
+                            <h3 class="card-title">Cute Jerry</h3>
+                            <p class="card-description">Always feels ki tere sath bhar bhar ke masti karu tere sath
+                                vakht bitaun hum dher sare maze kare hum khaiye piye nache and do hell level of masti
+                                and ese hi sath rahe.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card card-gradient-5">
+                        <div class="card-content">
+                            <div class="card-image-wrapper">
+                                <img src="5.JPG" alt="Memory 5">
+                            </div>
+                            <h3 class="card-title">Unforgettable Times</h3>
+                            <p class="card-description">This pic melts me like litrelly esa zor se man karta hai ki chote bachhe ke gal kich te hai 
+                                wese there bhi kichu aur itna pighal gaya hun ki, i just metled like ice does on floor and then it got evapourate......
+                                so dame cutenesss🤌🤌🤌🤌🤌🤌 infinty ∞
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+
+        <button class="continue-btn" onclick="goToFinale()">Birthday Wishes 💝</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const track = document.getElementById('carouselTrack');
+        const cards = document.querySelectorAll('.carousel-card');
+        const totalSlides = cards.length;
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        // Create dots
+        function createDots() {
+            const dotsContainer = document.getElementById('carouselDots');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function goToSlide(index) {
+            currentSlide = Math.max(0, Math.min(index, totalSlides - 1));
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            updateDots();
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        // Touch/Mouse drag functionality
+        track.addEventListener('mousedown', dragStart);
+        track.addEventListener('touchstart', dragStart);
+        track.addEventListener('mousemove', drag);
+        track.addEventListener('touchmove', drag);
+        track.addEventListener('mouseup', dragEnd);
+        track.addEventListener('touchend', dragEnd);
+        track.addEventListener('mouseleave', dragEnd);
+
+        function dragStart(e) {
+            isDragging = true;
+            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            track.style.transition = 'none';
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            const diff = currentX - startX;
+            const currentTransform = -currentSlide * 100;
+            const dragPercent = (diff / track.offsetWidth) * 100;
+            track.style.transform = `translateX(${currentTransform + dragPercent}%)`;
+        }
+
+        function dragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            const diff = currentX - startX;
+            const threshold = 50;
+
+            if (diff > threshold && currentSlide > 0) {
+                previousSlide();
+            } else if (diff < -threshold && currentSlide < totalSlides - 1) {
+                nextSlide();
+            } else {
+                goToSlide(currentSlide);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+
+
+
+        function createHearts() {
+            const container = document.getElementById('hearts');
+            const hearts = ['💕', '💖', '💗', '💓', '💝', '🩷', '❤️'];
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        function goToFinale() {
+            document.body.style.opacity = 0;
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => window.location.href = 'wishes.html', 500);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createHearts();
+            createDots();
+        });
+    </script>
+</body>
+
+</html>
